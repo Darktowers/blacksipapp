@@ -1,0 +1,18 @@
+.tabs{
+    ul{
+        li{
+            a{
+                padding: 1em;
+            }
+            @media screen and (max-width:720px) {
+                width: 100%;    
+            }
+        }
+        @media screen and (max-width:720px) {
+            flex-direction: column;    
+        }
+    }
+}
+.padding{
+    padding: 1.5rem;
+}
