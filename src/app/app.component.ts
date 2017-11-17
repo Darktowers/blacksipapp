@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AvionesService } from './services/api.services';
 
 @Component({
   selector: 'app-root',
@@ -6,26 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'My app yiahh';
-  nombreServicio = "";
+  nombreServicio = '';
   clickServicio = false;
-  selectedItem = "" 
-  lugares:any = [
-    { cercania:1, active:true, nombre: 'Floreria'},
-    { cercania:2, active:false, nombre: 'Donas'},
-    { cercania:1, active:true, nombre: 'Veterinaria'},
-    { cercania:3, active:true, nombre: 'Veterinaria'}
-    
-  ];
-  mostrarForm(nombre,event:any){
+  selectedItem = '';
+  aviones = null;
+  mostrarForm(nombre, event: any) {
     console.log(event);
     this.nombreServicio = nombre;
     this.clickServicio = true;
     this.selectedItem = nombre;
     return false;
   }
-  constructor(){
-
+  constructor(private avionesService: AvionesService) {
+    this.getAviones();
+  }
+  getAviones() {
+    this.avionesService.getAviones().subscribe(data => this.aviones = data);
   }
 
 }

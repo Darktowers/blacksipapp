@@ -5,17 +5,22 @@ import { FormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
+import { ResaltarDirective } from './directives/resaltar.directive';
+import { AvionesService } from './services/api.services';
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ResaltarDirective
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [AvionesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

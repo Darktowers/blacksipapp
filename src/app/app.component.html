@@ -1,7 +1,7 @@
 <div class="tabs is-centered">
     <ul>
-      <ng-container *ngFor="let lugar of lugares">
-        <li *ngIf="lugar.active" [ngClass]="{'is-active' : lugar.nombre === selectedItem}"><a href="" (click)="mostrarForm(lugar.nombre,$event)">{{lugar.nombre}}</a></li>
+      <ng-container *ngFor="let avion of aviones">
+        <li [ngClass]="{'is-active' : avion.name === selectedItem}"><a href="" (click)="mostrarForm(avion.name,$event)">{{avion.name}}</a></li>
       </ng-container>
     </ul>
   </div>
@@ -24,7 +24,7 @@
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
-            Bienvenido
+            Hola, Bienvenido
           </h1>
           <h2 class="subtitle">
             Savemos que quieres viajar en un <strong>{{nombreServicio}}</strong>, por favor diligencia el siguiente formulario.
