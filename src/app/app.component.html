@@ -1,128 +1,102 @@
 <div class="tabs is-centered">
-    <ul>
-      <ng-container *ngFor="let avion of aviones">
-        <li [ngClass]="{'is-active' : avion.name === selectedItem}"><a href="" (click)="mostrarForm(avion.name,$event)">{{avion.name}}</a></li>
-      </ng-container>
-    </ul>
-  </div>
-  <div class="container is-fullhd" *ngIf="!clickServicio">
-    <section class="hero is-dark">
-        <div class="hero-body">
-          <div class="container">
-            <h1 class="title">
-              Hola
-            </h1>
-            <h2 class="subtitle">
-             Porfavor selecciona una categoria
-            </h2>
-          </div>
-        </div>
-      </section>
-  </div>
+  <ul>
+    <ng-container *ngFor="let avion of aviones">
+      <li [ngClass]="{'is-active' : avion.name === selectedItem}">
+        <a href="" (click)="mostrarForm(avion.name,$event)">{{avion.name}}</a>
+      </li>
+    </ng-container>
+  </ul>
+</div>
+<div class="container is-fullhd" *ngIf="!clickServicio">
+  <section class="hero is-dark">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Hola
+        </h1>
+        <h2 class="subtitle">
+          Porfavor selecciona una categoria
+        </h2>
+      </div>
+    </div>
+  </section>
+</div>
 <div class="container is-fullhd" *ngIf="clickServicio">
-  <section class="hero is-light">
+  <form class="padding" [formGroup]="form" (ngSubmit)="onSubmit(form.value)">
+    <section class="hero is-light">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">
             Hola, Bienvenido
           </h1>
           <h2 class="subtitle">
-            Savemos que quieres viajar en un <strong>{{nombreServicio}}</strong>, por favor diligencia el siguiente formulario.
+            Sabemos que quieres viajar en un
+            <strong>{{nombreServicio}}</strong>, por favor diligencia el siguiente formulario.
           </h2>
         </div>
       </div>
     </section>
-    <form action="/" method="POST" class="padding">
-      <div class="notification is-success">
-        <button class="delete"></button>
-        Primar lorem ipsum dolor sit amet, consectetur
-        adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Sit amet,
-        consectetur adipiscing elit
+    <div class="field">
+      <label class="label">Nombre completo</label>
+      <div class="control">
+        <input class="is-medium input" [ngClass]="{'is-danger': !form.controls['nombre'].valid && form.controls['nombre'].touched }" type="text" formControlName="nombre" placeholder="Nombre">
       </div>
+      <p class="help is-danger" *ngIf="!form.controls['nombre'].valid && form.controls['nombre'].touched ">Nombre requerido</p>
+    </div>
+
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control has-icons-left has-icons-right">
+        <input class="is-medium input" [ngClass]="{'is-danger': !form.controls['correo'].valid && form.controls['correo'].touched }" type="email" placeholder="email@" formControlName="correo"  value="">
+        <span class="icon is-small is-left">
+          <i class="fa fa-envelope"></i>
+        </span>
+      </div>
+      <p class="help is-danger" *ngIf="!form.controls['correo'].valid && form.controls['correo'].touched ">Email requerido</p>      
+    </div>
+    <div class="columns">
+      <div class="column">
         <div class="field">
-            <label class="label">Name</label>
-            <div class="control">
-              <input class="input" type="text" placeholder="Text input">
-            </div>
+          <label class="label">Celular</label>
+          <div class="control has-icons-left has-icons-right">
+            <input class="is-medium input" [ngClass]="{'is-danger': !form.controls['celular'].valid && form.controls['celular'].touched }" type="text" placeholder="Celular" formControlName="celular"  value="">
+            <span class="icon is-small is-left">
+              <i class="fa fa-phone"></i>
+            </span>
           </div>
-          
-          <div class="field">
-            <label class="label">Username</label>
-            <div class="control has-icons-left has-icons-right">
-              <input class="input is-success" type="text" placeholder="Text input" value="bulma">
-              <span class="icon is-small is-left">
-                <i class="fa fa-user"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fa fa-check"></i>
-              </span>
-            </div>
-            <p class="help is-success">This username is available</p>
+          <p class="help is-danger" *ngIf="!form.controls['celular'].valid && form.controls['celular'].touched ">Celular requerido</p>      
+        </div>
+      </div>
+      <div class="column">
+        <div class="field">
+          <label class="label">Edad</label>
+          <div class="control">
+            <input class="is-medium input" [ngClass]="{'is-danger': !form.controls['edad'].valid && form.controls['edad'].touched }" type="number" placeholder="Edad" value="" formControlName="edad"  >
           </div>
-          
-          <div class="field">
-            <label class="label">Email</label>
-            <div class="control has-icons-left has-icons-right">
-              <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
-              <span class="icon is-small is-left">
-                <i class="fa fa-envelope"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fa fa-warning"></i>
-              </span>
-            </div>
-            <p class="help is-danger">This email is invalid</p>
-          </div>
-          
-          <div class="field">
-            <label class="label">Subject</label>
-            <div class="control">
-              <div class="select">
-                <select>
-                  <option>Select dropdown</option>
-                  <option>With options</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          
-          <div class="field">
-            <label class="label">Message</label>
-            <div class="control">
-              <textarea class="textarea" placeholder="Textarea"></textarea>
-            </div>
-          </div>
-          
-          <div class="field">
-            <div class="control">
-              <label class="checkbox">
-                <input type="checkbox">
-                I agree to the <a href="#">terms and conditions</a>
-              </label>
-            </div>
-          </div>
-          
-          <div class="field">
-            <div class="control">
-              <label class="radio">
-                <input type="radio" name="question">
-                Yes
-              </label>
-              <label class="radio">
-                <input type="radio" name="question">
-                No
-              </label>
-            </div>
-          </div>
-          
-          <div class="field is-grouped">
-            <div class="control">
-              <input type="submit" class="button is-link" value="Enviar"/>
-            </div>
-            <div class="control">
-              <button class="button is-text">Cancel</button>
-            </div>
-          </div>
- 
-    </form>
+          <p class="help is-danger" *ngIf="!form.controls['edad'].valid && form.controls['edad'].touched ">Edad incorrecta</p>                
+        </div>
+      </div>
+    </div>
+
+    <div class="field is-grouped">
+      <div class="control">
+        <button type="submit" [disabled]="!form.valid" [ngClass]="{'is-loading': guardando == true }"   class="button is-medium is-link">Enviar</button>
+      </div>
+      <div class="control">
+        <a class="button is-medium" (click)="ocultarForm($event)">Cancelar</a>
+      </div>
+    </div>
+  </form>
+  <div class="modal" [ngClass]="{'is-active': formSuccess == true }">
+    <div class="modal-background" ></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Formulario enviado</p>
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->
+        <h3>Tu información fue enviada con exitó, estaremos en contacto contigo.</h3>
+      </section>
+    </div>
+  </div>
 </div>

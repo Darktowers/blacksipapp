@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
@@ -14,7 +14,7 @@ export class AvionesService {
     constructor(private http: Http) { }
     getAviones() {
         //   return this.aviones;
-        return this.http.get(this.API_ENDPOINT + '/upcoming')
+        return this.http.get(this.API_ENDPOINT + '/aviones')
             .do(this.logResponse)
             .map(this.extractDate)
             .catch(this.catchError);
@@ -29,4 +29,12 @@ export class AvionesService {
     private extractDate(res: Response) {
         return res.json();
     }
+    guardarUsuario(usuario) {
+        const headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.post(this.API_ENDPOINT + '/sms', usuario, { headers: headers })
+            .do(this.logResponse)
+            .map(this.extractDate)
+            .catch(this.catchError);
+    }
+
 }
